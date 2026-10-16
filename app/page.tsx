@@ -47,7 +47,7 @@ export default function Home() {
 <div style={{"background": "#0B0620", "border": "4px solid #FF3D8B", "padding": "16px", "display": "flex", "flexDirection": "column", "gap": "12px"}}>
 <div style={{"display": "flex", "justifyContent": "space-between", "fontFamily": "'Press Start 2P', monospace", "fontSize": "10px", "color": "#FF3D8B"}}><span>ANIMAITOR.EXE</span><span>● REC</span></div>
 <img src="/animaitor.jpg" alt="Animaitor editor showing walk cycle sprite sheets for several characters" style={{"width": "100%", "height": "320px", "objectFit": "cover", "objectPosition": "left top", "display": "block", "background": "#1F1240"}} />
-<div style={{"fontFamily": "'Press Start 2P', monospace", "fontSize": "10px", "lineHeight": "1.8", "color": "#CFC4F0"}}>&gt; a grumpy knight cat with a tiny sword<span className="blink">_</span></div>
+<div style={{"fontFamily": "'Press Start 2P', monospace", "fontSize": "10px", "lineHeight": "1.8", "color": "#CFC4F0"}}>&gt; a cute boxer with red gloves<span className="blink">_</span></div>
 </div>
 <div style={{"display": "flex", "flexDirection": "column", "gap": "20px"}}>
 <div style={{"display": "flex", "flexWrap": "wrap", "gap": "12px", "alignItems": "center"}}><div style={{"background": "#FFD23F", "color": "#1A1200", "fontFamily": "'Press Start 2P', monospace", "fontSize": "14px", "padding": "12px 16px", "border": "3px solid #0B0620", "boxShadow": "5px 5px 0 #FF3D8B"}}>★ PREMIUM ONLY</div><div style={{"background": "#FF3D8B", "color": "#2A0012", "fontFamily": "'Press Start 2P', monospace", "fontSize": "11px", "padding": "8px 12px"}}>NEW POWER-UP</div></div>

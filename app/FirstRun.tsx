@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type CSSProperties, type KeyboardEvent } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 
 const PS: CSSProperties = { fontFamily: "'Press Start 2P', monospace" };
 const BC: CSSProperties = { fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 800, textTransform: "uppercase" };
@@ -88,12 +88,31 @@ export default function FirstRun() {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [won, closed]);
-  const setKey = (e: KeyboardEvent, v: boolean) => {
+  const setKey = (e: globalThis.KeyboardEvent, v: boolean) => {
     const m: Record<string, "left" | "right"> = { ArrowLeft: "left", a: "left", A: "left", ArrowRight: "right", d: "right", D: "right" };
     if (m[e.key]) { g.current[m[e.key]] = v; e.preventDefault(); }
     if (v && [" ", "ArrowUp", "w", "W"].includes(e.key)) { g.current.jump = true; e.preventDefault(); }
     if (v) start();
   };
+
+  const inView = useRef(false);
+  const keyRef = useRef(setKey);
+  keyRef.current = setKey;
+  useEffect(() => {
+    const el = stageRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([en]) => { inView.current = en.intersectionRatio >= 0.5; }, { threshold: [0, 0.5, 1] });
+    io.observe(el);
+    const down = (e: globalThis.KeyboardEvent) => {
+      const t = e.target as HTMLElement | null;
+      if (t && (t.isContentEditable || ["INPUT", "TEXTAREA", "SELECT"].includes(t.tagName))) return;
+      if (inView.current) keyRef.current(e, true);
+    };
+    const up = (e: globalThis.KeyboardEvent) => keyRef.current(e, false);
+    window.addEventListener("keydown", down);
+    window.addEventListener("keyup", up);
+    return () => { io.disconnect(); window.removeEventListener("keydown", down); window.removeEventListener("keyup", up); };
+  }, []);
 
   return (
 <section style={{"position": "relative", "background": "linear-gradient(180deg, #0B0620 0%, #1B0F4A 70%, #2A0B3D 100%)", "overflow": "hidden"}}>
@@ -112,8 +131,8 @@ export default function FirstRun() {
 <div style={{ ...PS, fontSize: "11px", lineHeight: 1.8, color: "#FFD23F" }}>PLAY IT: ARROWS OR A/D TO MOVE · SPACE TO JUMP · GRAB ALL 4 TICKETS</div>
 <div style={{ ...PS, fontSize: "11px", color: "#2FF801" }}>{tix} / 4 COLLECTED</div>
 </div>
-<div ref={stageRef} className="stage" tabIndex={0} role="application" aria-label="Mini platformer game. Click here, then use arrow keys and space." onKeyDown={(e) => setKey(e, true)} onKeyUp={(e) => setKey(e, false)} onPointerDown={() => { stageRef.current?.focus(); start(); }} style={{ position: "relative", height: "460px", background: "linear-gradient(180deg, #120838 0%, #2A0B3D 100%)", border: "4px solid #FFD23F", boxShadow: "8px 8px 0 #FF3D8B", overflow: "hidden", cursor: "pointer", touchAction: "none" }}>
-{!started && <div className="blink" style={{ position: "absolute", left: 0, right: 0, top: "24px", textAlign: "center", ...PS, fontSize: "12px", color: "#F5F1FF" }}>CLICK TO PLAY</div>}
+<div ref={stageRef} className="stage" tabIndex={0} role="application" aria-label="Mini platformer game. Use arrow keys or A and D to move, space to jump." onPointerDown={() => { stageRef.current?.focus(); start(); }} style={{ position: "relative", height: "460px", background: "linear-gradient(180deg, #120838 0%, #2A0B3D 100%)", border: "4px solid #FFD23F", boxShadow: "8px 8px 0 #FF3D8B", overflow: "hidden", cursor: "pointer", touchAction: "none" }}>
+{!started && <div className="blink" style={{ position: "absolute", left: 0, right: 0, top: "24px", textAlign: "center", ...PS, fontSize: "12px", color: "#F5F1FF" }}>PRESS ← → OR SPACE TO PLAY</div>}
 {PLATS.map((p) => (
 <div key={p.label}>
 <div className="bricks" style={{ ...pct(p.x, p.y, p.w, 18), border: "3px solid #0B0620", boxShadow: "4px 4px 0 #0B0620" }} />
