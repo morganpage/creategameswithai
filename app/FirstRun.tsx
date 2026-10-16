@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { fbTrackCustom } from "./MetaPixel";
 
 const PS: CSSProperties = { fontFamily: "'Press Start 2P', monospace" };
 const BC: CSSProperties = { fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 800, textTransform: "uppercase" };
@@ -29,7 +30,7 @@ function makeConfetti(): CSSProperties[] {
 
 type Game = { x: number; y: number; vy: number; ground: boolean; face: number; got: boolean[]; jump: boolean; left: boolean; right: boolean };
 declare global { interface Window { plausible?: (event: string, options?: { props?: Record<string, string> }) => void } }
-const track = (event: string) => { try { window.plausible?.(event); } catch {} };
+const track = (event: string) => { try { window.plausible?.(event); } catch {} fbTrackCustom(event.replace(" ", "")); };
 
 const fresh = (): Game => ({ x: 30, y: 24, vy: 0, ground: true, face: 1, got: [false, false, false, false], jump: false, left: false, right: false });
 

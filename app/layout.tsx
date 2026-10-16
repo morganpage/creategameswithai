@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import MetaPixel from "./MetaPixel";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -18,6 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         {children}
+        <MetaPixel />
         {/* Privacy-friendly analytics by Plausible */}
         <Script src="https://plausible.io/js/pa-z23RRNWB6Crn2M0wZENpC.js" strategy="afterInteractive" />
         <Script id="plausible-init" strategy="afterInteractive">
