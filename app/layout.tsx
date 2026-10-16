@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -15,7 +16,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* eslint-disable-next-line @next/next/no-page-custom-font */}
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Barlow:wght@400;600;700&family=Barlow+Condensed:wght@700;800&family=Archivo+Black&family=Plus+Jakarta+Sans:wght@700;800&family=Inter:wght@400;700&display=swap" />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        {/* Privacy-friendly analytics by Plausible */}
+        <Script src="https://plausible.io/js/pa-z23RRNWB6Crn2M0wZENpC.js" strategy="afterInteractive" />
+        <Script id="plausible-init" strategy="afterInteractive">
+          {`window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()`}
+        </Script>
+      </body>
     </html>
   );
 }

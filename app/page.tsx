@@ -10,7 +10,7 @@ export default function Home() {
 <div style={{"fontFamily": "'Press Start 2P', monospace", "fontSize": "13px", "lineHeight": "1.6"}}>CREATE GAMES <span style={{"color": "#FF6A00"}}>WITH AI</span></div>
 <div style={{"display": "flex", "flexWrap": "wrap", "gap": "20px", "alignItems": "center"}}>
 <span style={{"fontFamily": "'Press Start 2P', monospace", "fontSize": "11px", "color": "#FFD23F"}}>HI-SCORE 762 PLAYERS</span>
-<a href="https://www.skool.com/ai-craft/about" style={{"background": "#FF6A00", "color": "#1A0A00", "padding": "14px 20px", "fontFamily": "'Press Start 2P', monospace", "fontSize": "11px", "textDecoration": "none", "boxShadow": "4px 4px 0 #FFD23F"}}>INSERT COIN</a>
+<a href="https://www.skool.com/ai-craft/about" className="plausible-event-name=Join+Skool plausible-event-position=header" style={{"background": "#FF6A00", "color": "#1A0A00", "padding": "14px 20px", "fontFamily": "'Press Start 2P', monospace", "fontSize": "11px", "textDecoration": "none", "boxShadow": "4px 4px 0 #FFD23F"}}>INSERT COIN</a>
 </div>
 </header>
 
@@ -21,7 +21,7 @@ export default function Home() {
 <h1 style={{"margin": "0", "fontFamily": "'Barlow Condensed', sans-serif", "fontWeight": "800", "textTransform": "uppercase", "fontSize": "clamp(56px, 8vw, 112px)", "lineHeight": "0.88", "color": "#FFFFFF", "textShadow": "5px 5px 0 #FF6A00, 10px 10px 0 #FF3D8B"}}>Make games.<br />Ship games.<br />Earn $.</h1>
 <p style={{"margin": "0", "fontSize": "21px", "lineHeight": "1.5", "color": "#E4DBFF", "maxWidth": "36ch"}}>The community where you build your first game with AI in 5 minutes, animate your own characters, and put your game in a real arcade.</p>
 <div style={{"display": "flex", "flexWrap": "wrap", "gap": "16px", "alignItems": "center"}}>
-<a href="https://www.skool.com/ai-craft/about" style={{"background": "#FFD23F", "color": "#1A1200", "padding": "20px 28px", "fontFamily": "'Press Start 2P', monospace", "fontSize": "14px", "textDecoration": "none", "boxShadow": "6px 6px 0 #FF6A00"}}>PRESS START <span className="blink">▶</span></a>
+<a href="https://www.skool.com/ai-craft/about" className="plausible-event-name=Join+Skool plausible-event-position=hero" style={{"background": "#FFD23F", "color": "#1A1200", "padding": "20px 28px", "fontFamily": "'Press Start 2P', monospace", "fontSize": "14px", "textDecoration": "none", "boxShadow": "6px 6px 0 #FF6A00"}}>PRESS START <span className="blink">▶</span></a>
 <span style={{"fontFamily": "'Press Start 2P', monospace", "fontSize": "10px", "lineHeight": "1.8", "color": "#FFE6F1"}}>7 DAYS FREE<br />THEN $3.50/MO ON ANNUAL</span>
 </div>
 </div>
@@ -72,7 +72,7 @@ export default function Home() {
 <h2 style={{"margin": "0", "fontFamily": "'Plus Jakarta Sans', sans-serif", "fontSize": "clamp(36px, 5vw, 56px)", "fontWeight": "800", "letterSpacing": "-1px", "lineHeight": "1.05", "color": "#FFFFFF"}}>Your game, in a real arcade.</h2>
 <p style={{"margin": "0", "fontSize": "18px", "lineHeight": "1.6", "color": "#ADAAAA"}}>gud arcade is our web and Telegram arcade. Players play, earn tickets and come back. Premium members get the Publish and Earn course that walks them through getting their game listed.</p>
 <p style={{"margin": "0", "fontSize": "17px", "color": "#FF6B9B", "fontWeight": "700"}}>Publishing is a Premium perk. $12/mo on annual.</p>
-<a href="https://www.skool.com/ai-craft/about" style={{"alignSelf": "flex-start", "background": "#2FF801", "color": "#0B5800", "padding": "16px 28px", "borderRadius": "999px", "fontFamily": "'Plus Jakarta Sans', sans-serif", "fontWeight": "700", "fontSize": "17px", "textDecoration": "none"}}>Join and go Premium</a>
+<a href="https://www.skool.com/ai-craft/about" className="plausible-event-name=Join+Skool plausible-event-position=gud-arcade" style={{"alignSelf": "flex-start", "background": "#2FF801", "color": "#0B5800", "padding": "16px 28px", "borderRadius": "999px", "fontFamily": "'Plus Jakarta Sans', sans-serif", "fontWeight": "700", "fontSize": "17px", "textDecoration": "none"}}>Join and go Premium</a>
 </div>
 <div style={{"background": "#161616", "border": "1px solid #2A2A2A", "borderRadius": "20px", "padding": "16px", "display": "flex", "flexDirection": "column", "gap": "16px"}}>
 <div style={{"background": "linear-gradient(0deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.1) 65%), url(/games/last-stand-samurai.jpg) center / cover", "borderRadius": "14px", "padding": "24px", "minHeight": "240px", "display": "flex", "flexDirection": "column", "justifyContent": "flex-end", "gap": "10px"}}>
@@ -149,7 +149,7 @@ export default function Home() {
 <p style={{"margin": "0", "color": "#CFC4F0", "lineHeight": "1.6"}}>Everything in Builder, plus Animaitor and Publish and Earn on gud arcade. Or $24 billed monthly.</p>
 </div>
 </div>
-<a href="https://www.skool.com/ai-craft/about" style={{"alignSelf": "center", "background": "#FFD23F", "color": "#1A1200", "padding": "20px 28px", "fontFamily": "'Press Start 2P', monospace", "fontSize": "13px", "textDecoration": "none", "boxShadow": "6px 6px 0 #FF6A00"}}>SELECT ANNUAL ▶</a>
+<a href="https://www.skool.com/ai-craft/about" className="plausible-event-name=Join+Skool plausible-event-position=pricing" style={{"alignSelf": "center", "background": "#FFD23F", "color": "#1A1200", "padding": "20px 28px", "fontFamily": "'Press Start 2P', monospace", "fontSize": "13px", "textDecoration": "none", "boxShadow": "6px 6px 0 #FF6A00"}}>SELECT ANNUAL ▶</a>
 </div>
 </section>
 
@@ -165,7 +165,7 @@ export default function Home() {
 <div style={{"maxWidth": "900px", "margin": "0 auto", "padding": "112px 24px", "display": "flex", "flexDirection": "column", "gap": "28px", "alignItems": "center", "textAlign": "center"}}>
 <div style={{"fontFamily": "'Press Start 2P', monospace", "fontSize": "14px"}}>CONTINUE?</div>
 <h2 style={{"margin": "0", "fontFamily": "'Barlow Condensed', sans-serif", "fontWeight": "800", "textTransform": "uppercase", "fontSize": "clamp(48px, 7vw, 96px)", "lineHeight": "0.9"}}>Not many people get to say they made a game.</h2>
-<a href="https://www.skool.com/ai-craft/about" style={{"background": "#0B0620", "color": "#FFD23F", "padding": "22px 32px", "fontFamily": "'Press Start 2P', monospace", "fontSize": "14px", "textDecoration": "none", "boxShadow": "6px 6px 0 #FFD23F"}}>YES ▶ JOIN FREE</a>
+<a href="https://www.skool.com/ai-craft/about" className="plausible-event-name=Join+Skool plausible-event-position=final" style={{"background": "#0B0620", "color": "#FFD23F", "padding": "22px 32px", "fontFamily": "'Press Start 2P', monospace", "fontSize": "14px", "textDecoration": "none", "boxShadow": "6px 6px 0 #FFD23F"}}>YES ▶ JOIN FREE</a>
 <div style={{"fontFamily": "'Press Start 2P', monospace", "fontSize": "10px"}}>7-DAY FREE TRIAL</div>
 </div>
 </section>

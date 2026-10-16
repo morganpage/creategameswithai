@@ -28,6 +28,9 @@ function makeConfetti(): CSSProperties[] {
 }
 
 type Game = { x: number; y: number; vy: number; ground: boolean; face: number; got: boolean[]; jump: boolean; left: boolean; right: boolean };
+declare global { interface Window { plausible?: (event: string, options?: { props?: Record<string, string> }) => void } }
+const track = (event: string) => { try { window.plausible?.(event); } catch {} };
+
 const fresh = (): Game => ({ x: 30, y: 24, vy: 0, ground: true, face: 1, got: [false, false, false, false], jump: false, left: false, right: false });
 
 export default function FirstRun() {
@@ -76,9 +79,10 @@ export default function FirstRun() {
   const won = tix === 4;
   const score = String(tix * 2500).padStart(6, "0");
 
-  useEffect(() => { if (won && confetti.length === 0) setConfetti(makeConfetti()); }, [won, confetti.length]);
+  useEffect(() => { if (won && confetti.length === 0) { setConfetti(makeConfetti()); track("Game Won"); } }, [won, confetti.length]);
 
-  const start = () => setStarted(true);
+  const startedRef = useRef(false);
+  const start = () => { if (!startedRef.current) { startedRef.current = true; track("Game Start"); } setStarted(true); };
   const hold = (k: "left" | "right", v: boolean) => { g.current[k] = v; if (v) start(); };
   const reset = () => { g.current = fresh(); setConfetti([]); setClosed(false); };
   const close = () => { setClosed(true); stageRef.current?.focus(); };
@@ -171,7 +175,7 @@ export default function FirstRun() {
 <h3 id="unlock-title" style={{ margin: 0, ...BC, fontSize: "clamp(48px, 7vw, 96px)", lineHeight: 0.9 }}>You&apos;re a natural.</h3>
 <p style={{ margin: 0, fontSize: "21px", lineHeight: 1.5, maxWidth: "40ch", fontWeight: 600 }}>If you can do this, you can publish a game. Once you&apos;ve joined and finished your trial, DM Morgan this code and he&apos;ll send you a free game from the <a href="#past-prizes" onClick={close} style={{ color: "#0B2A00", fontWeight: 800 }}>competition prize list</a>.</p>
 <div style={{ background: "#0B0620", color: "#FFD23F", ...PS, fontSize: "clamp(18px, 3vw, 32px)", padding: "20px 24px", border: "4px dashed #FFD23F", letterSpacing: "2px" }}>CHICKENDINNER</div>
-<a href="https://www.skool.com/ai-craft/about" style={{ background: "#0B0620", color: "#2FF801", padding: "20px 28px", ...PS, fontSize: "13px", textDecoration: "none", boxShadow: "6px 6px 0 #FF3D8B" }}>CLAIM IT: JOIN FREE ▶</a>
+<a href="https://www.skool.com/ai-craft/about" className="plausible-event-name=Join+Skool plausible-event-position=game-unlock" style={{ background: "#0B0620", color: "#2FF801", padding: "20px 28px", ...PS, fontSize: "13px", textDecoration: "none", boxShadow: "6px 6px 0 #FF3D8B" }}>CLAIM IT: JOIN FREE ▶</a>
 <button onClick={reset} style={{ background: "transparent", color: "#0B2A00", border: "none", ...PS, fontSize: "10px", textDecoration: "underline", cursor: "pointer", minHeight: "44px" }}>PLAY AGAIN</button>
 </div>
 </div>
@@ -179,7 +183,7 @@ export default function FirstRun() {
 </div>
 <div style={{"maxWidth": "1200px", "margin": "0 auto", "padding": "48px 24px 40px", "display": "flex", "flexWrap": "wrap", "gap": "20px", "alignItems": "center", "justifyContent": "space-between"}}>
 <div style={{"fontFamily": "'Press Start 2P', monospace", "fontSize": "12px", "lineHeight": "1.8", "color": "#FFD23F"}}>JUNE CLEARED IT IN <span style={{"color": "#2FF801"}}>7 DAYS</span></div>
-<a href="https://www.skool.com/ai-craft/about" style={{"background": "#2FF801", "color": "#0B2A00", "padding": "18px 26px", "fontFamily": "'Press Start 2P', monospace", "fontSize": "13px", "textDecoration": "none", "boxShadow": "6px 6px 0 #FFD23F"}}>START WORLD 1-1 ▶</a>
+<a href="https://www.skool.com/ai-craft/about" className="plausible-event-name=Join+Skool plausible-event-position=game-section" style={{"background": "#2FF801", "color": "#0B2A00", "padding": "18px 26px", "fontFamily": "'Press Start 2P', monospace", "fontSize": "13px", "textDecoration": "none", "boxShadow": "6px 6px 0 #FFD23F"}}>START WORLD 1-1 ▶</a>
 </div>
 <div className="bricks" style={{"height": "56px", "borderTop": "4px solid #0B0620"}}></div>
 </section>
