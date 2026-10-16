@@ -5,20 +5,27 @@ import { fbTrackCustom } from "./MetaPixel";
 
 const PS: CSSProperties = { fontFamily: "'Press Start 2P', monospace" };
 const BC: CSSProperties = { fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 800, textTransform: "uppercase" };
-const H = 460;
 const HW = 30;
 const HH = 40;
-const PLATS = [
-  { x: 120, w: 170, y: 80, label: "PROMPT", tag: "GAME", premium: false },
-  { x: 350, w: 170, y: 160, label: "QUESTS", tag: "PRIZE", premium: false },
-  { x: 580, w: 170, y: 240, label: "ANIMAITOR", tag: "HERO", premium: true },
-  { x: 810, w: 170, y: 320, label: "PUBLISH", tag: "LIVE", premium: true },
+const STEPS = [
+  { label: "PROMPT", tag: "GAME", premium: false },
+  { label: "QUESTS", tag: "PRIZE", premium: false },
+  { label: "ANIMAITOR", tag: "HERO", premium: true },
+  { label: "PUBLISH", tag: "LIVE", premium: true },
 ];
+// All positions are level units. The stage keeps the level's aspect ratio, so
+// everything scales evenly with the stage width. Phones get a taller zig-zag
+// level instead of the wide staircase, which is unreadable when squashed.
+type Level = { W: number; H: number; pole: number; plats: { x: number; w: number; y: number }[] };
+const WIDE: Level = { W: 1000, H: 460, pole: 116, plats: [{ x: 120, w: 170, y: 80 }, { x: 350, w: 170, y: 160 }, { x: 580, w: 170, y: 240 }, { x: 810, w: 170, y: 320 }] };
+const NARROW: Level = { W: 500, H: 640, pole: 140, plats: [{ x: 40, w: 180, y: 90 }, { x: 280, w: 180, y: 180 }, { x: 40, w: 180, y: 270 }, { x: 280, w: 180, y: 360 }] };
+const levelFor = (width: number) => (width < 640 ? NARROW : WIDE);
+const platsOf = (L: Level) => L.plats.map((p, i) => ({ ...p, ...STEPS[i] }));
 const COLORS = ["#2FF801", "#29E7FF", "#FF3D8B", "#FFD23F", "#FF6A00", "#F5F1FF"];
-const padBtn: CSSProperties = { minWidth: "64px", minHeight: "56px", background: "#170D33", color: "#F5F1FF", border: "3px solid #29E7FF", ...PS, fontSize: "16px", cursor: "pointer", touchAction: "none" };
+const padBtn: CSSProperties = { minWidth: "64px", minHeight: "56px", background: "#170D33", color: "#F5F1FF", border: "3px solid #29E7FF", ...PS, fontSize: "16px", cursor: "pointer", touchAction: "none", userSelect: "none", WebkitUserSelect: "none", WebkitTouchCallout: "none" };
 
-function pct(x: number, y: number, w: number, h: number): CSSProperties {
-  return { position: "absolute", left: x / 10 + "%", bottom: (y / H) * 100 + "%", width: w / 10 + "%", height: h + "px", boxSizing: "border-box" };
+function pct(L: Level, x: number, y: number, w: number, h: number): CSSProperties {
+  return { position: "absolute", left: (x / L.W) * 100 + "%", bottom: (y / L.H) * 100 + "%", width: (w / L.W) * 100 + "%", height: (h / L.H) * 100 + "%", boxSizing: "border-box" };
 }
 
 function makeConfetti(): CSSProperties[] {
@@ -41,6 +48,23 @@ export default function FirstRun() {
   const [started, setStarted] = useState(false);
   const [confetti, setConfetti] = useState<CSSProperties[]>([]);
   const [closed, setClosed] = useState(false);
+  const [level, setLevel] = useState<Level>(WIDE);
+  const levelRef = useRef<Level>(WIDE);
+
+  useEffect(() => {
+    const el = stageRef.current;
+    if (!el) return;
+    // Measure straight away too: ResizeObserver only reports on a rendered
+    // frame, which can be late on a backgrounded tab.
+    const apply = (width: number) => {
+      const next = levelFor(width);
+      if (next !== levelRef.current) { levelRef.current = next; g.current = fresh(); setLevel(next); }
+    };
+    apply(el.getBoundingClientRect().width);
+    const ro = new ResizeObserver(([en]) => apply(en.contentRect.width));
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
 
   useEffect(() => {
     let last = performance.now();
@@ -55,15 +79,17 @@ export default function FirstRun() {
       h.jump = false;
       h.vy -= 1500 * dt;
       const prevY = h.y;
-      h.x = Math.max(0, Math.min(1000 - HW, h.x + dir * 320 * dt));
+      const L = levelRef.current;
+      const PL = platsOf(L);
+      h.x = Math.max(0, Math.min(L.W - HW, h.x + dir * 320 * dt));
       h.y += h.vy * dt;
       h.ground = false;
       if (h.y <= 24) { h.y = 24; h.vy = 0; h.ground = true; }
-      for (const p of PLATS) {
+      for (const p of PL) {
         const top = p.y + 18;
         if (h.vy <= 0 && prevY >= top - 0.5 && h.y <= top && h.x + HW > p.x && h.x < p.x + p.w) { h.y = top; h.vy = 0; h.ground = true; }
       }
-      PLATS.forEach((p, i) => {
+      PL.forEach((p, i) => {
         const px = p.x + p.w / 2 - 25, py = p.y + 62;
         if (!h.got[i] && h.x + HW > px && h.x < px + 50 && h.y + HH > py && h.y < py + 30) h.got[i] = true;
       });
@@ -119,6 +145,10 @@ export default function FirstRun() {
     return () => { io.disconnect(); window.removeEventListener("keydown", down); window.removeEventListener("keyup", up); };
   }, []);
 
+  const L = level;
+  const PLATS = platsOf(L);
+  const last = PLATS[3];
+
   return (
 <section style={{"position": "relative", "background": "linear-gradient(180deg, #0B0620 0%, #1B0F4A 70%, #2A0B3D 100%)", "overflow": "hidden"}}>
 <div style={{"background": "#000000", "borderBottom": "4px solid #FFD23F"}}>
@@ -136,30 +166,30 @@ export default function FirstRun() {
 <div style={{ ...PS, fontSize: "11px", lineHeight: 1.8, color: "#FFD23F" }}>PLAY IT: ARROWS OR A/D TO MOVE · SPACE TO JUMP · GRAB ALL 4 TICKETS</div>
 <div style={{ ...PS, fontSize: "11px", color: "#2FF801" }}>{tix} / 4 COLLECTED</div>
 </div>
-<div ref={stageRef} className="stage" tabIndex={0} role="application" aria-label="Mini platformer game. Use arrow keys or A and D to move, space to jump." onPointerDown={() => { stageRef.current?.focus(); start(); }} style={{ position: "relative", height: "460px", background: "linear-gradient(180deg, #120838 0%, #2A0B3D 100%)", border: "4px solid #FFD23F", boxShadow: "8px 8px 0 #FF3D8B", overflow: "hidden", cursor: "pointer", touchAction: "none" }}>
+<div ref={stageRef} className="stage" tabIndex={0} role="application" aria-label="Mini platformer game. Use arrow keys or A and D to move, space to jump." onPointerDown={() => { stageRef.current?.focus(); start(); }} style={{ position: "relative", width: "100%", aspectRatio: `${L.W} / ${L.H}`, background: "linear-gradient(180deg, #120838 0%, #2A0B3D 100%)", border: "4px solid #FFD23F", boxShadow: "8px 8px 0 #FF3D8B", overflow: "hidden", cursor: "pointer", touchAction: "pan-y" }}>
 {!started && <div className="blink" style={{ position: "absolute", left: 0, right: 0, top: "24px", textAlign: "center", ...PS, fontSize: "12px", color: "#F5F1FF" }}>PRESS ← → OR SPACE TO PLAY</div>}
 {PLATS.map((p) => (
 <div key={p.label}>
-<div className="bricks" style={{ ...pct(p.x, p.y, p.w, 18), border: "3px solid #0B0620", boxShadow: "4px 4px 0 #0B0620" }} />
-<div style={{ position: "absolute", left: p.x / 10 + "%", bottom: ((p.y - 22) / H) * 100 + "%", width: p.w / 10 + "%", textAlign: "center", ...PS, fontSize: "9px", color: "#A99BD6" }}>{p.label}</div>
-{p.premium && <div style={{ position: "absolute", left: (p.x + 4) / 10 + "%", bottom: ((p.y - 52) / H) * 100 + "%", background: "#FF3D8B", color: "#2A0012", ...PS, fontSize: "9px", padding: "6px 8px", border: "2px solid #0B0620", boxShadow: "3px 3px 0 #FFD23F", whiteSpace: "nowrap" }}>PREMIUM ONLY</div>}
+<div className="bricks" style={{ ...pct(L, p.x, p.y, p.w, 18), border: "3px solid #0B0620", boxShadow: "4px 4px 0 #0B0620" }} />
+<div style={{ position: "absolute", left: (p.x / L.W) * 100 + "%", bottom: ((p.y - 22) / L.H) * 100 + "%", width: (p.w / L.W) * 100 + "%", textAlign: "center", ...PS, fontSize: "9px", color: "#A99BD6" }}>{p.label}</div>
+{p.premium && <div style={{ position: "absolute", left: ((p.x + 4) / L.W) * 100 + "%", bottom: `calc(${((p.y - 22) / L.H) * 100}% - 32px)`, background: "#FF3D8B", color: "#2A0012", ...PS, fontSize: "9px", padding: "6px 8px", border: "2px solid #0B0620", boxShadow: "3px 3px 0 #FFD23F", whiteSpace: "nowrap" }}>PREMIUM ONLY</div>}
 </div>
 ))}
 {PLATS.map((p, i) => !got[i] && (
-<div key={p.tag} className="bob" style={{ ...pct(p.x + p.w / 2 - 25, p.y + 62, 50, 30), background: "#FFD23F", color: "#1A1200", ...PS, fontSize: "8px", display: "flex", alignItems: "center", justifyContent: "center", border: "3px dashed #C98A00", boxShadow: "0 0 16px #FFD23F" }}>{p.tag}</div>
+<div key={p.tag} className="bob" style={{ ...pct(L, p.x + p.w / 2 - 25, p.y + 62, 50, 30), background: "#FFD23F", color: "#1A1200", ...PS, fontSize: "8px", display: "flex", alignItems: "center", justifyContent: "center", border: "3px dashed #C98A00", boxShadow: "0 0 16px #FFD23F" }}>{p.tag}</div>
 ))}
-<div style={{ position: "absolute", left: "96%", bottom: (338 / H) * 100 + "%", height: "116px", width: "6px" }}>
+<div style={{ position: "absolute", left: ((last.x + last.w - 20) / L.W) * 100 + "%", bottom: ((last.y + 18) / L.H) * 100 + "%", height: (L.pole / L.H) * 100 + "%", width: "6px" }}>
 <div style={{ width: "6px", height: "100%", background: "#F5F1FF" }} />
 <div style={{ position: "absolute", top: 0, right: "6px", display: "flex", gap: "4px", fontFamily: "'Archivo Black', sans-serif", fontSize: "13px", background: "#0E0E0E", padding: "4px 6px", border: "2px solid #2FF801", whiteSpace: "nowrap" }}><span style={{ background: "#2FF801", color: "#0B5800", padding: "0 4px", borderRadius: "3px" }}>gud</span><span>arcade</span></div>
 </div>
-<div style={{ ...pct(hero.x, hero.y, HW, HH), background: "#FF6A00", border: "3px solid #0B0620", borderRadius: "4px", transform: `scaleX(${hero.face})` }}>
+<div style={{ ...pct(L, hero.x, hero.y, HW, HH), background: "#FF6A00", border: "3px solid #0B0620", borderRadius: "4px", transform: `scaleX(${hero.face})` }}>
 <div style={{ position: "absolute", left: 0, right: 0, top: 0, height: "30%", background: "#0B0620", borderRadius: "4px 4px 0 0" }} />
 <div style={{ position: "absolute", left: "50%", right: "-20%", top: "22%", height: "8%", background: "#0B0620" }} />
 <div style={{ position: "absolute", left: "50%", top: "40%", width: "14%", height: "12%", background: "#0B0620" }} />
 <div style={{ position: "absolute", left: "78%", top: "40%", width: "14%", height: "12%", background: "#0B0620" }} />
 <div style={{ position: "absolute", left: 0, right: 0, bottom: 0, height: "32%", background: "#0B0620" }} />
 </div>
-<div className="bricks" style={{ position: "absolute", left: 0, right: 0, bottom: 0, height: "24px" }} />
+<div className="bricks" style={{ position: "absolute", left: 0, right: 0, bottom: 0, height: (24 / L.H) * 100 + "%" }} />
 </div>
 <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
 <button aria-label="Move left" onPointerDown={() => hold("left", true)} onPointerUp={() => hold("left", false)} onPointerLeave={() => hold("left", false)} style={padBtn}>◀</button>
