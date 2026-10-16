@@ -101,6 +101,20 @@ export default function Home() {
 <div style={{"background": "#170D33", "border": "3px solid #3A2A6B", "padding": "24px", "display": "flex", "flexDirection": "column", "gap": "10px"}}><div style={{"fontFamily": "'Press Start 2P', monospace", "fontSize": "10px", "color": "#29E7FF"}}>RARE</div><h3 style={{"margin": "0", "fontFamily": "'Barlow Condensed', sans-serif", "fontWeight": "800", "fontSize": "28px", "textTransform": "uppercase"}}>Prompt library</h3><p style={{"margin": "0", "color": "#CFC4F0", "lineHeight": "1.55"}}>Tested prompts for mechanics, art and polish.</p></div>
 <div style={{"background": "#170D33", "border": "3px solid #3A2A6B", "padding": "24px", "display": "flex", "flexDirection": "column", "gap": "10px"}}><div style={{"fontFamily": "'Press Start 2P', monospace", "fontSize": "10px", "color": "#FFD23F"}}>COMMON</div><h3 style={{"margin": "0", "fontFamily": "'Barlow Condensed', sans-serif", "fontWeight": "800", "fontSize": "28px", "textTransform": "uppercase"}}>Classroom</h3><p style={{"margin": "0", "color": "#CFC4F0", "lineHeight": "1.55"}}>Step-by-step courses from first prompt to finished game.</p></div>
 </div>
+<div style={{"background": "#170D33", "border": "4px solid #FFD23F", "padding": "28px", "display": "flex", "flexDirection": "column", "gap": "20px"}}>
+<div style={{"display": "flex", "flexWrap": "wrap", "gap": "12px", "alignItems": "baseline", "justifyContent": "space-between"}}>
+<h3 style={{"margin": 0, "fontFamily": "'Barlow Condensed', sans-serif", "fontWeight": 800, "fontSize": "36px", "textTransform": "uppercase"}}>Past comp prizes</h3>
+<div style={{"fontFamily": "'Press Start 2P', monospace", "fontSize": "10px", "lineHeight": 1.8, "color": "#FFD23F"}}>WINNERS PICKED FROM THE PRIZE LIST</div>
+</div>
+<ul style={{"listStyle": "none", "margin": 0, "padding": 0, "display": "grid", "gridTemplateColumns": "repeat(auto-fit, minmax(220px, 1fr))", "gap": "14px"}}>
+<li style={{"background": "#0B0620", "border": "3px solid #FFD23F", "boxShadow": "4px 4px 0 #FF6A00", "padding": "16px 18px", "fontFamily": "'Barlow Condensed', sans-serif", "fontWeight": 800, "fontSize": "22px", "textTransform": "uppercase", "lineHeight": 1.1}}>{"Assassin's Creed Valhalla"}</li>
+<li style={{"background": "#0B0620", "border": "3px solid #FFD23F", "boxShadow": "4px 4px 0 #FF6A00", "padding": "16px 18px", "fontFamily": "'Barlow Condensed', sans-serif", "fontWeight": 800, "fontSize": "22px", "textTransform": "uppercase", "lineHeight": 1.1}}>{"Hunt: Showdown 1896"}</li>
+<li style={{"background": "#0B0620", "border": "3px solid #FFD23F", "boxShadow": "4px 4px 0 #FF6A00", "padding": "16px 18px", "fontFamily": "'Barlow Condensed', sans-serif", "fontWeight": 800, "fontSize": "22px", "textTransform": "uppercase", "lineHeight": 1.1}}>{"Warhammer 40,000: Boltgun"}</li>
+<li style={{"background": "#0B0620", "border": "3px solid #FFD23F", "boxShadow": "4px 4px 0 #FF6A00", "padding": "16px 18px", "fontFamily": "'Barlow Condensed', sans-serif", "fontWeight": 800, "fontSize": "22px", "textTransform": "uppercase", "lineHeight": 1.1}}>{"Tomb Raider 1-3 Remastered"}</li>
+<li style={{"background": "#0B0620", "border": "3px solid #FFD23F", "boxShadow": "4px 4px 0 #FF6A00", "padding": "16px 18px", "fontFamily": "'Barlow Condensed', sans-serif", "fontWeight": 800, "fontSize": "22px", "textTransform": "uppercase", "lineHeight": 1.1}}>{"OCTOPATH TRAVELER II"}</li>
+<li style={{"background": "#0B0620", "border": "3px solid #FFD23F", "boxShadow": "4px 4px 0 #FF6A00", "padding": "16px 18px", "fontFamily": "'Barlow Condensed', sans-serif", "fontWeight": 800, "fontSize": "22px", "textTransform": "uppercase", "lineHeight": 1.1}}>{"Crysis 3"}</li>
+</ul>
+</div>
 </section>
 
 <section style={{"background": "linear-gradient(180deg, #0B0620 0%, #2A0B3D 100%)", "borderTop": "4px solid #FFD23F"}}>
