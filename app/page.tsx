@@ -36,7 +36,7 @@ export default function Home() {
 
 <section style={{"background": "#FFD23F", "color": "#1A1200", "overflow": "hidden"}}>
 <div style={{"padding": "18px 24px", "display": "flex", "gap": "48px", "justifyContent": "center", "flexWrap": "wrap", "fontFamily": "'Press Start 2P', monospace", "fontSize": "12px", "lineHeight": "1.6"}}>
-<span>★ NO CODING NEEDED</span><span>★ FIRST GAME IN 5 MINUTES</span><span>★ WEEKLY COMPS</span><span>★ REAL PLAYERS</span>
+<span>★ NO CODING NEEDED</span><span>★ FIRST GAME IN 5 MINUTES</span><span>★ WEEKLY COMPETITIONS</span><span>★ REAL PLAYERS</span>
 </div>
 </section>
 
@@ -97,13 +97,13 @@ export default function Home() {
 </div>
 <div style={{"display": "grid", "gridTemplateColumns": "repeat(auto-fit, minmax(240px, 1fr))", "gap": "16px"}}>
 <div style={{"background": "#170D33", "border": "3px solid #3A2A6B", "padding": "24px", "display": "flex", "flexDirection": "column", "gap": "10px"}}><div style={{"fontFamily": "'Press Start 2P', monospace", "fontSize": "10px", "color": "#2FF801"}}>RARE</div><h3 style={{"margin": "0", "fontFamily": "'Barlow Condensed', sans-serif", "fontWeight": "800", "fontSize": "28px", "textTransform": "uppercase"}}>Mini Quests</h3><p style={{"margin": "0", "color": "#CFC4F0", "lineHeight": "1.55"}}>First Game in 5 Minutes, One-Page GDD, Pimp My Game, Ship It!</p></div>
-<div style={{"background": "#170D33", "border": "3px solid #3A2A6B", "padding": "24px", "display": "flex", "flexDirection": "column", "gap": "10px"}}><div style={{"fontFamily": "'Press Start 2P', monospace", "fontSize": "10px", "color": "#FF3D8B"}}>EPIC</div><h3 style={{"margin": "0", "fontFamily": "'Barlow Condensed', sans-serif", "fontWeight": "800", "fontSize": "28px", "textTransform": "uppercase"}}>Weekly comps</h3><p style={{"margin": "0", "color": "#CFC4F0", "lineHeight": "1.55"}}>Every quest entry counts. Winners pick a game from the prize list.</p></div>
+<div style={{"background": "#170D33", "border": "3px solid #3A2A6B", "padding": "24px", "display": "flex", "flexDirection": "column", "gap": "10px"}}><div style={{"fontFamily": "'Press Start 2P', monospace", "fontSize": "10px", "color": "#FF3D8B"}}>EPIC</div><h3 style={{"margin": "0", "fontFamily": "'Barlow Condensed', sans-serif", "fontWeight": "800", "fontSize": "28px", "textTransform": "uppercase"}}>Weekly competitions</h3><p style={{"margin": "0", "color": "#CFC4F0", "lineHeight": "1.55"}}>Every quest entry counts. Winners pick a game from the prize list.</p></div>
 <div style={{"background": "#170D33", "border": "3px solid #3A2A6B", "padding": "24px", "display": "flex", "flexDirection": "column", "gap": "10px"}}><div style={{"fontFamily": "'Press Start 2P', monospace", "fontSize": "10px", "color": "#29E7FF"}}>RARE</div><h3 style={{"margin": "0", "fontFamily": "'Barlow Condensed', sans-serif", "fontWeight": "800", "fontSize": "28px", "textTransform": "uppercase"}}>Prompt library</h3><p style={{"margin": "0", "color": "#CFC4F0", "lineHeight": "1.55"}}>Tested prompts for mechanics, art and polish.</p></div>
 <div style={{"background": "#170D33", "border": "3px solid #3A2A6B", "padding": "24px", "display": "flex", "flexDirection": "column", "gap": "10px"}}><div style={{"fontFamily": "'Press Start 2P', monospace", "fontSize": "10px", "color": "#FFD23F"}}>COMMON</div><h3 style={{"margin": "0", "fontFamily": "'Barlow Condensed', sans-serif", "fontWeight": "800", "fontSize": "28px", "textTransform": "uppercase"}}>Classroom</h3><p style={{"margin": "0", "color": "#CFC4F0", "lineHeight": "1.55"}}>Step-by-step courses from first prompt to finished game.</p></div>
 </div>
-<div style={{"background": "#170D33", "border": "4px solid #FFD23F", "padding": "28px", "display": "flex", "flexDirection": "column", "gap": "20px"}}>
+<div id="past-prizes" style={{"scrollMarginTop": "24px", "background": "#170D33", "border": "4px solid #FFD23F", "padding": "28px", "display": "flex", "flexDirection": "column", "gap": "20px"}}>
 <div style={{"display": "flex", "flexWrap": "wrap", "gap": "12px", "alignItems": "baseline", "justifyContent": "space-between"}}>
-<h3 style={{"margin": 0, "fontFamily": "'Barlow Condensed', sans-serif", "fontWeight": 800, "fontSize": "36px", "textTransform": "uppercase"}}>Past comp prizes</h3>
+<h3 style={{"margin": 0, "fontFamily": "'Barlow Condensed', sans-serif", "fontWeight": 800, "fontSize": "36px", "textTransform": "uppercase"}}>Past competition prizes</h3>
 <div style={{"fontFamily": "'Press Start 2P', monospace", "fontSize": "10px", "lineHeight": 1.8, "color": "#FFD23F"}}>WINNERS PICKED FROM THE PRIZE LIST</div>
 </div>
 <ul style={{"listStyle": "none", "margin": 0, "padding": 0, "display": "grid", "gridTemplateColumns": "repeat(auto-fit, minmax(220px, 1fr))", "gap": "14px"}}>
@@ -129,7 +129,7 @@ export default function Home() {
 <div style={{"fontFamily": "'Press Start 2P', monospace", "fontSize": "12px", "color": "#29E7FF"}}>CLASS: BUILDER</div>
 <div style={{"display": "flex", "alignItems": "baseline", "gap": "12px", "flexWrap": "wrap"}}><span style={{"fontFamily": "'Barlow Condensed', sans-serif", "fontWeight": "800", "fontSize": "80px", "lineHeight": "1"}}>$3.50</span><span style={{"color": "#A99BD6", "fontSize": "18px"}}>/mo</span><span style={{"color": "#A99BD6", "fontSize": "22px", "textDecoration": "line-through"}}>$7</span></div>
 <div style={{"fontFamily": "'Press Start 2P', monospace", "fontSize": "10px", "color": "#FFD23F"}}>$42 BILLED ANNUALLY</div>
-<p style={{"margin": "0", "color": "#CFC4F0", "lineHeight": "1.6"}}>7-day free trial. Quests, comps, classroom, community. Or $7 billed monthly.</p>
+<p style={{"margin": "0", "color": "#CFC4F0", "lineHeight": "1.6"}}>7-day free trial. Quests, competitions, classroom, community. Or $7 billed monthly.</p>
 </div>
 <div style={{"background": "#170D33", "border": "4px solid #FF6A00", "padding": "32px", "display": "flex", "flexDirection": "column", "gap": "14px", "boxShadow": "10px 10px 0 #FF6A00", "position": "relative"}}>
 <div style={{"position": "absolute", "top": "-18px", "right": "20px", "background": "#FF3D8B", "color": "#2A0012", "fontFamily": "'Press Start 2P', monospace", "fontSize": "10px", "padding": "8px 10px"}}>LEGENDARY</div>
