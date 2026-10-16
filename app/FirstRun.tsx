@@ -64,7 +64,7 @@ export default function FirstRun() {
         if (h.vy <= 0 && prevY >= top - 0.5 && h.y <= top && h.x + HW > p.x && h.x < p.x + p.w) { h.y = top; h.vy = 0; h.ground = true; }
       }
       PLATS.forEach((p, i) => {
-        const px = p.x + p.w / 2 - 25, py = p.y + 70;
+        const px = p.x + p.w / 2 - 25, py = p.y + 62;
         if (!h.got[i] && h.x + HW > px && h.x < px + 50 && h.y + HH > py && h.y < py + 30) h.got[i] = true;
       });
       setFrame((f) => f + 1);
@@ -146,9 +146,9 @@ export default function FirstRun() {
 </div>
 ))}
 {PLATS.map((p, i) => !got[i] && (
-<div key={p.tag} className="bob" style={{ ...pct(p.x + p.w / 2 - 25, p.y + 70, 50, 30), background: "#FFD23F", color: "#1A1200", ...PS, fontSize: "8px", display: "flex", alignItems: "center", justifyContent: "center", border: "3px dashed #C98A00", boxShadow: "0 0 16px #FFD23F" }}>{p.tag}</div>
+<div key={p.tag} className="bob" style={{ ...pct(p.x + p.w / 2 - 25, p.y + 62, 50, 30), background: "#FFD23F", color: "#1A1200", ...PS, fontSize: "8px", display: "flex", alignItems: "center", justifyContent: "center", border: "3px dashed #C98A00", boxShadow: "0 0 16px #FFD23F" }}>{p.tag}</div>
 ))}
-<div style={{ position: "absolute", left: "96%", bottom: (338 / H) * 100 + "%", height: "90px", width: "6px" }}>
+<div style={{ position: "absolute", left: "96%", bottom: (338 / H) * 100 + "%", height: "116px", width: "6px" }}>
 <div style={{ width: "6px", height: "100%", background: "#F5F1FF" }} />
 <div style={{ position: "absolute", top: 0, right: "6px", display: "flex", gap: "4px", fontFamily: "'Archivo Black', sans-serif", fontSize: "13px", background: "#0E0E0E", padding: "4px 6px", border: "2px solid #2FF801", whiteSpace: "nowrap" }}><span style={{ background: "#2FF801", color: "#0B5800", padding: "0 4px", borderRadius: "3px" }}>gud</span><span>arcade</span></div>
 </div>
