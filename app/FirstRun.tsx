@@ -36,6 +36,7 @@ export default function FirstRun() {
   const [, setFrame] = useState(0);
   const [started, setStarted] = useState(false);
   const [confetti, setConfetti] = useState<CSSProperties[]>([]);
+  const [closed, setClosed] = useState(false);
 
   useEffect(() => {
     let last = performance.now();
@@ -79,7 +80,14 @@ export default function FirstRun() {
 
   const start = () => setStarted(true);
   const hold = (k: "left" | "right", v: boolean) => { g.current[k] = v; if (v) start(); };
-  const reset = () => { g.current = fresh(); setConfetti([]); };
+  const reset = () => { g.current = fresh(); setConfetti([]); setClosed(false); };
+  const close = () => { setClosed(true); stageRef.current?.focus(); };
+  useEffect(() => {
+    if (!won || closed) return;
+    const onKey = (e: globalThis.KeyboardEvent) => { if (e.key === "Escape") close(); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [won, closed]);
   const setKey = (e: KeyboardEvent, v: boolean) => {
     const m: Record<string, "left" | "right"> = { ArrowLeft: "left", a: "left", A: "left", ArrowRight: "right", d: "right", D: "right" };
     if (m[e.key]) { g.current[m[e.key]] = v; e.preventDefault(); }
@@ -128,7 +136,6 @@ export default function FirstRun() {
 <div style={{ position: "absolute", left: 0, right: 0, bottom: 0, height: "32%", background: "#0B0620" }} />
 </div>
 <div className="bricks" style={{ position: "absolute", left: 0, right: 0, bottom: 0, height: "24px" }} />
-{won && confetti.map((c, i) => <div key={i} className="conf" style={c} />)}
 </div>
 <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
 <button aria-label="Move left" onPointerDown={() => hold("left", true)} onPointerUp={() => hold("left", false)} onPointerLeave={() => hold("left", false)} style={padBtn}>◀</button>
@@ -136,13 +143,18 @@ export default function FirstRun() {
 <button onPointerDown={() => { g.current.jump = true; start(); }} style={{ minWidth: "120px", minHeight: "56px", background: "#FF3D8B", color: "#2A0012", border: "3px solid #0B0620", ...PS, fontSize: "12px", cursor: "pointer", touchAction: "none" }}>JUMP</button>
 <button onClick={reset} style={{ minHeight: "56px", padding: "0 18px", background: "transparent", color: "#A99BD6", border: "3px solid #3A2A6B", ...PS, fontSize: "10px", cursor: "pointer" }}>RESTART</button>
 </div>
-{won && (
-<div className="pop" style={{ background: "#2FF801", color: "#0B2A00", border: "6px solid #0B0620", boxShadow: "12px 12px 0 #FFD23F", padding: "40px 32px", display: "flex", flexDirection: "column", gap: "20px", alignItems: "center", textAlign: "center" }}>
+{won && !closed && (
+<div role="dialog" aria-modal="true" aria-labelledby="unlock-title" onClick={close} style={{ position: "fixed", inset: 0, zIndex: 50, background: "rgba(11,6,32,0.82)", display: "flex", alignItems: "center", justifyContent: "center", padding: "24px", overflowY: "auto" }}>
+{confetti.map((c, i) => <div key={i} className="conf" style={c} />)}
+<div className="pop" onClick={(e) => e.stopPropagation()} style={{ position: "relative", maxWidth: "860px", width: "100%", background: "#2FF801", color: "#0B2A00", border: "6px solid #0B0620", boxShadow: "12px 12px 0 #FFD23F", padding: "48px 32px 40px", display: "flex", flexDirection: "column", gap: "20px", alignItems: "center", textAlign: "center" }}>
+<button onClick={close} aria-label="Close" autoFocus style={{ position: "absolute", top: "12px", right: "12px", width: "48px", height: "48px", background: "#0B0620", color: "#2FF801", border: "none", ...PS, fontSize: "14px", cursor: "pointer" }}>X</button>
 <div style={{ ...PS, fontSize: "14px" }}>★ MASSIVE UNLOCK ★</div>
-<h3 style={{ margin: 0, ...BC, fontSize: "clamp(48px, 7vw, 96px)", lineHeight: 0.9 }}>You&apos;re a natural.</h3>
+<h3 id="unlock-title" style={{ margin: 0, ...BC, fontSize: "clamp(48px, 7vw, 96px)", lineHeight: 0.9 }}>You&apos;re a natural.</h3>
 <p style={{ margin: 0, fontSize: "21px", lineHeight: 1.5, maxWidth: "40ch", fontWeight: 600 }}>If you can do this, you can publish a game. Once you&apos;ve joined and finished your trial, DM Morgan this code and he&apos;ll send you a free game from the competition prize list.</p>
 <div style={{ background: "#0B0620", color: "#FFD23F", ...PS, fontSize: "clamp(18px, 3vw, 32px)", padding: "20px 24px", border: "4px dashed #FFD23F", letterSpacing: "2px" }}>CHICKENDINNER</div>
 <a href="https://www.skool.com/ai-craft/about" style={{ background: "#0B0620", color: "#2FF801", padding: "20px 28px", ...PS, fontSize: "13px", textDecoration: "none", boxShadow: "6px 6px 0 #FF3D8B" }}>CLAIM IT: JOIN FREE ▶</a>
+<button onClick={reset} style={{ background: "transparent", color: "#0B2A00", border: "none", ...PS, fontSize: "10px", textDecoration: "underline", cursor: "pointer", minHeight: "44px" }}>PLAY AGAIN</button>
+</div>
 </div>
 )}
 </div>
