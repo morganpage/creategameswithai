@@ -41,6 +41,15 @@ export default function Home() {
 </div>
 </section>
 
+<section id="starter-kit" style={{"background": "#170D33", "borderTop": "4px solid #29E7FF", "borderBottom": "4px solid #29E7FF"}}>
+<div style={{"maxWidth": "900px", "margin": "0 auto", "padding": "80px 24px", "display": "flex", "flexDirection": "column", "gap": "20px", "alignItems": "center", "textAlign": "center"}}>
+<div style={{"background": "#29E7FF", "color": "#0B0620", "fontFamily": "'Press Start 2P', monospace", "fontSize": "11px", "padding": "10px 14px"}}>FREE STARTER KIT</div>
+<h2 style={{"margin": "0", "fontFamily": "'Barlow Condensed', sans-serif", "fontWeight": "800", "textTransform": "uppercase", "fontSize": "clamp(40px, 6vw, 72px)", "lineHeight": "0.95"}}>Make your first game tonight</h2>
+<p style={{"margin": "0", "color": "#E4DBFF", "fontSize": "19px", "lineHeight": "1.5", "maxWidth": "620px"}}>The one prompt and 3 steps to a playable game in about 5 minutes. No coding. Straight to your inbox.</p>
+<KitForm position="starter-kit" />
+</div>
+</section>
+
 
 <FirstRun />
 <section style={{"background": "#170D33", "borderTop": "4px solid #FF3D8B", "borderBottom": "4px solid #FF3D8B"}}>
@@ -159,15 +168,6 @@ export default function Home() {
 <div style={{"display": "grid", "gridTemplateColumns": "repeat(auto-fit, minmax(300px, 1fr))", "gap": "24px"}}>
 <figure style={{"margin": "0", "background": "#170D33", "border": "4px solid #2FF801", "padding": "28px", "display": "flex", "flexDirection": "column", "gap": "16px"}}><div style={{"fontFamily": "'Press Start 2P', monospace", "fontSize": "10px", "color": "#2FF801"}}>P1 · JUNE MG</div><blockquote style={{"margin": "0", "fontSize": "21px", "lineHeight": "1.5"}}>"Morgan has really helped me enter the gaming industry with confidence. In 7 days I had a game completed and live on a gaming website! I can't wait to create more games!"</blockquote><figcaption style={{"fontFamily": "'Press Start 2P', monospace", "fontSize": "9px", "lineHeight": "1.8", "color": "#FFD23F"}}>STILL A PAYING MEMBER AFTER 3 MONTHS</figcaption></figure>
 <figure style={{"margin": "0", "background": "#170D33", "border": "4px solid #29E7FF", "padding": "28px", "display": "flex", "flexDirection": "column", "gap": "16px"}}><div style={{"fontFamily": "'Press Start 2P', monospace", "fontSize": "10px", "color": "#29E7FF"}}>P2 · BO LARSEN</div><blockquote style={{"margin": "0", "fontSize": "21px", "lineHeight": "1.5"}}>"Very cozy, friendly, and helpful community. The admins are very active and helpful"</blockquote><figcaption style={{"fontFamily": "'Press Start 2P', monospace", "fontSize": "9px", "lineHeight": "1.8", "color": "#FFD23F"}}>STILL A PAYING MEMBER AFTER 1 MONTH</figcaption></figure>
-</div>
-</section>
-
-<section id="starter-kit" style={{"background": "#170D33", "borderTop": "4px solid #29E7FF", "borderBottom": "4px solid #29E7FF"}}>
-<div style={{"maxWidth": "900px", "margin": "0 auto", "padding": "80px 24px", "display": "flex", "flexDirection": "column", "gap": "20px", "alignItems": "center", "textAlign": "center"}}>
-<div style={{"background": "#29E7FF", "color": "#0B0620", "fontFamily": "'Press Start 2P', monospace", "fontSize": "11px", "padding": "10px 14px"}}>FREE STARTER KIT</div>
-<h2 style={{"margin": "0", "fontFamily": "'Barlow Condensed', sans-serif", "fontWeight": "800", "textTransform": "uppercase", "fontSize": "clamp(40px, 6vw, 72px)", "lineHeight": "0.95"}}>Make your first game tonight</h2>
-<p style={{"margin": "0", "color": "#E4DBFF", "fontSize": "19px", "lineHeight": "1.5", "maxWidth": "620px"}}>The one prompt and 3 steps to a playable game in about 5 minutes. No coding. Straight to your inbox.</p>
-<KitForm position="starter-kit" />
 </div>
 </section>
 
