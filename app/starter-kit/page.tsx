@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import CopyPrompt from "./CopyPrompt";
 
 // Delivery page for the Kit starter-kit form (Kit redirects here after a
 // subscriber confirms). Kept out of search and the sitemap.
@@ -21,7 +22,6 @@ const SWAPS = [
 const label = { fontFamily: "'Press Start 2P', monospace", fontSize: "11px" } as const;
 const h2 = { margin: 0, fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 800, textTransform: "uppercase", fontSize: "clamp(32px, 5vw, 48px)", lineHeight: 1 } as const;
 const card = { background: "#170D33", border: "4px solid #29E7FF", padding: "28px", display: "flex", flexDirection: "column", gap: "14px" } as const;
-const code = { margin: 0, background: "#0B0620", border: "2px dashed #FFD23F", padding: "18px", whiteSpace: "pre-wrap", fontFamily: "ui-monospace, Menlo, monospace", fontSize: "16px", lineHeight: 1.6, color: "#FFF6D6", userSelect: "all" } as const;
 const p = { margin: 0, color: "#E4DBFF", fontSize: "18px", lineHeight: 1.6 } as const;
 
 export default function StarterKit() {
@@ -45,8 +45,7 @@ export default function StarterKit() {
         <section style={card}>
           <div style={{ ...label, color: "#29E7FF" }}>STEP 2</div>
           <h2 style={h2}>Paste this prompt</h2>
-          <pre style={code}>{PROMPT}</pre>
-          <p style={{ ...p, fontSize: "15px", color: "#A99BD6" }}>Tap the box to select it all, then copy.</p>
+          <CopyPrompt text={PROMPT} name="first-game" />
         </section>
 
         <section style={card}>
@@ -67,9 +66,9 @@ export default function StarterKit() {
         <section style={{ ...card, borderColor: "#FF3D8B" }}>
           <div style={{ ...label, color: "#FF3D8B" }}>IF SOMETHING BREAKS</div>
           <h2 style={h2}>Just tell it</h2>
-          <pre style={code}>{"The game has a bug: [say what happens]. Fix it and give me the full file again."}</pre>
+          <CopyPrompt text="The game has a bug: [say what happens]. Fix it and give me the full file again." name="fix-bug" />
           <p style={p}>Then make it yours:</p>
-          <pre style={code}>{"Change the player to a [cat], add [coins to collect], and make it get faster over time. Give me the full file again."}</pre>
+          <CopyPrompt text="Change the player to a [cat], add [coins to collect], and make it get faster over time. Give me the full file again." name="make-it-yours" />
         </section>
 
         <section style={{ background: "#FF6A00", color: "#1A0A00", padding: "36px 28px", display: "flex", flexDirection: "column", gap: "18px", alignItems: "flex-start", boxShadow: "8px 8px 0 #FFD23F" }}>
