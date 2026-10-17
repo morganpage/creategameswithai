@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import CopyPrompt from "./CopyPrompt";
+import GamePicker from "./GamePicker";
 
 // Delivery page for the Kit starter-kit form (Kit redirects here after a
 // subscriber confirms). Kept out of search and the sitemap.
@@ -8,16 +9,6 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
   alternates: { canonical: "/starter-kit" },
 };
-
-const PROMPT = "Create a complete, playable Flappy Bird style game in one HTML file. Use plain JavaScript and a canvas, with no external files or libraries. Include a start screen, a score, a game over screen, and click or tap to restart.";
-
-const SWAPS = [
-  ["Endless runner", "a Chrome Dino style endless runner"],
-  ["Brick breaker", "a Breakout style brick breaker"],
-  ["Snake", "a classic Snake game"],
-  ["Space shooter", "a Space Invaders style shooter"],
-  ["Memory match", "a card memory match game with emoji cards"],
-];
 
 const label = { fontFamily: "'Press Start 2P', monospace", fontSize: "11px" } as const;
 const h2 = { margin: 0, fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 800, textTransform: "uppercase", fontSize: "clamp(32px, 5vw, 48px)", lineHeight: 1 } as const;
@@ -44,8 +35,9 @@ export default function StarterKit() {
 
         <section style={card}>
           <div style={{ ...label, color: "#29E7FF" }}>STEP 2</div>
-          <h2 style={h2}>Paste this prompt</h2>
-          <CopyPrompt text={PROMPT} name="first-game" />
+          <h2 style={h2}>Pick a game, copy the prompt</h2>
+          <GamePicker />
+          <p style={{ ...p, fontSize: "16px", color: "#A99BD6" }}>Paste it into the chat and hit send. Not sure? Start with Flappy Bird.</p>
         </section>
 
         <section style={card}>
@@ -54,14 +46,6 @@ export default function StarterKit() {
           <p style={p}>In Claude the game appears next to the chat, just click and play. Anywhere else, copy the code into a file called <code>game.html</code> and double-click it to open it in your browser.</p>
         </section>
 
-        <section style={{ ...card, borderColor: "#FFD23F" }}>
-          <div style={{ ...label, color: "#FFD23F" }}>SWAP THE GAME</div>
-          <h2 style={h2}>Five more to try</h2>
-          <p style={p}>Replace &quot;a Flappy Bird style game&quot; in the prompt with any of these:</p>
-          <ul style={{ ...p, paddingLeft: "22px", display: "flex", flexDirection: "column", gap: "8px" }}>
-            {SWAPS.map(([name, text]) => <li key={name}><strong>{name}:</strong> &quot;{text}&quot;</li>)}
-          </ul>
-        </section>
 
         <section style={{ ...card, borderColor: "#FF3D8B" }}>
           <div style={{ ...label, color: "#FF3D8B" }}>IF SOMETHING BREAKS</div>
