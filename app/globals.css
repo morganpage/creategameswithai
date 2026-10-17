@@ -12,3 +12,12 @@ a{color:#FFD23F}a:hover{color:#FFE680}
 @media (prefers-reduced-motion: reduce){.blink,.bob,.pop{animation:none}}
 
 .stage:focus-visible{outline:3px solid #29E7FF;outline-offset:4px}
+
+.kit-form .formkit-form{background:transparent!important;max-width:560px!important;margin:0 auto!important;border:0!important}
+.kit-form .formkit-input{background:#0B0620!important;color:#fff!important;border:2px solid #CFC4F0!important;border-radius:0!important;font-family:'Barlow',sans-serif!important;font-size:18px!important}
+.kit-form .formkit-input::placeholder{color:#A99BD6!important}
+.kit-form .formkit-submit{background:#FFD23F!important;color:#1A1200!important;border-radius:0!important;box-shadow:4px 4px 0 #FF6A00!important}
+.kit-form .formkit-submit span{font-family:'Press Start 2P',monospace!important;font-size:11px!important}
+.kit-form .formkit-submit:hover{background:#FF3D8B!important;color:#fff!important}
+.kit-form .formkit-alert-success{background:#2FF801!important;color:#0B5800!important;border:0!important;border-radius:0!important;font-size:17px!important}
+.kit-form .formkit-powered-by-convertkit-container{display:none!important}
