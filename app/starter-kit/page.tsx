@@ -39,7 +39,7 @@ export default function StarterKit() {
         <section style={card}>
           <div style={{ ...label, color: "#29E7FF" }}>STEP 1</div>
           <h2 style={h2}>Open a free AI chat</h2>
-          <p style={p}>Claude (claude.ai) is the easiest because it runs the game right in the chat. ChatGPT and Gemini work too.</p>
+          <p style={p}><a href="https://claude.ai" target="_blank" rel="noopener" className="plausible-event-name=AI+Chat+Click plausible-event-chat=claude">Claude</a> is the easiest because it runs the game right in the chat. <a href="https://chatgpt.com" target="_blank" rel="noopener" className="plausible-event-name=AI+Chat+Click plausible-event-chat=chatgpt">ChatGPT</a> and <a href="https://gemini.google.com" target="_blank" rel="noopener" className="plausible-event-name=AI+Chat+Click plausible-event-chat=gemini">Gemini</a> work too.</p>
         </section>
 
         <section style={card}>
