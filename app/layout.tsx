@@ -3,9 +3,32 @@ import Script from "next/script";
 import MetaPixel from "./MetaPixel";
 import "./globals.css";
 
+const SITE = "https://www.creategameswithai.com";
+const TITLE = "Create Games with AI: Make Your First Game with AI in 5 Minutes";
+const DESCRIPTION = "Join the Create Games with AI community. Build your first playable game with AI in 5 minutes, no coding needed. Animate your own characters with Animaitor, enter weekly competitions and publish on gud arcade.";
+
 export const metadata: Metadata = {
-  title: "Create Games with AI",
-  description: "Make your first game with AI in 5 minutes, animate your own characters with Animaitor and publish on gud arcade.",
+  metadataBase: new URL(SITE),
+  title: TITLE,
+  description: DESCRIPTION,
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    url: SITE,
+    siteName: "Create Games with AI",
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "Create Games with AI: master AI game development, publish games and earn" }],
+  },
+  twitter: { card: "summary_large_image", title: TITLE, description: DESCRIPTION, images: ["/og.jpg"] },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    { "@type": "Organization", "@id": `${SITE}/#org`, name: "Create Games with AI", url: SITE, logo: `${SITE}/og.jpg`, founder: { "@type": "Person", name: "Morgan Page" }, sameAs: ["https://www.skool.com/ai-craft"] },
+    { "@type": "WebSite", "@id": `${SITE}/#website`, url: SITE, name: "Create Games with AI", publisher: { "@id": `${SITE}/#org` } },
+  ],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -18,6 +41,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Barlow:wght@400;600;700&family=Barlow+Condensed:wght@700;800&family=Archivo+Black&family=Plus+Jakarta+Sans:wght@700;800&family=Inter:wght@400;700&display=swap" />
       </head>
       <body>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         {children}
         <MetaPixel />
         {/* Privacy-friendly analytics by Plausible */}
